@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_poster"
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/test2"/>
+
+    <TextView
+        android:id="@+id/movie_title"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:background="#E6FFFFFF"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test Image"
+        android:fontFamily="sans-serif light"/>
+
+</FrameLayout>
