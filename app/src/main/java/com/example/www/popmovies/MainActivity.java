@@ -13,8 +13,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new Fragment())
+                    .add(R.id.container, new MovieFragment())
                     .commit();
         }
+
     }
 }

@@ -24,9 +24,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private Activity mAct;
     private Context mContext;
 
-    public MovieAdapter(ArrayList<Movie> mMovieList, Activity activity){
+    public MovieAdapter(ArrayList<Movie> mMovieList, Context context){
         this.mMovieList = mMovieList;
-        this.mAct = activity;
+        this.mContext = context;
     }
 
 
@@ -37,15 +37,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Movie movie = mMovieList.get(position);
-        holder.title.setText(movie.getTitle());
-        Picasso.with(mContext)
-                .load(movie.getPoster_path())
-                .into(holder.poster);
-    }
-
-    @Override
     public int getItemCount() {
         return mMovieList.size();
     }
@@ -53,14 +44,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView poster;
-        public TextView title;
+        //public TextView title;
 
         public ViewHolder(View view){
             super(view);
             poster = (ImageView) view.findViewById(R.id.image_poster);
-            title = (TextView) view.findViewById(R.id.movie_title);
+            //title = (TextView) view.findViewById(R.id.movie_title);
         }
 
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Movie movie = mMovieList.get(position);
+        //holder.title.setText(movie.getTitle());
+        Picasso.with(mContext)
+                .load(movie.getPoster_path())
+                .into(holder.poster);
     }
 
 }

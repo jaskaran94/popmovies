@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/test2"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/movie_title"
         android:layout_gravity="center_horizontal|bottom"
         android:gravity="center"
@@ -22,6 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Test Image"
-        android:fontFamily="sans-serif light"/>
+        android:fontFamily="sans-serif light"/>-->
 
 </FrameLayout>
