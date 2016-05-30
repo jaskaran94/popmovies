@@ -49,8 +49,29 @@ public class MovieFragment extends Fragment {
 
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("mMovieList", mMovieList);
+        outState.putInt("pageCount", pageCount);
+        outState.putInt("previousTotal", previousTotal);
+        outState.putInt("firstVisibleItem", firstVisibleItem);
+        outState.putInt("visibleItemCount", visibleItemCount);
+        outState.putInt("totalItemCount", totalItemCount);
+        outState.putBoolean("loading", loading);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            mMovieList = savedInstanceState.getParcelableArrayList("mMovieList");
+            pageCount = savedInstanceState.getInt("pageCount");
+            previousTotal = savedInstanceState.getInt("previousTotal");
+            firstVisibleItem = savedInstanceState.getInt("firstVisibleItem");
+            visibleItemCount = savedInstanceState.getInt("visibleItemCount");
+            totalItemCount = savedInstanceState.getInt("totalItemCount");
+            loading = savedInstanceState.getBoolean("loading");
+        }
     }
 
     @Nullable
@@ -71,31 +92,9 @@ public class MovieFragment extends Fragment {
 
     }
 
-    /*@Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState != null){
-            mMovieList = savedInstanceState.getParcelableArrayList("mMovielist");
-            pageCount = savedInstanceState.getInt("pageCount");
-            previousTotal = savedInstanceState.getInt("previousTotal");
-            firstVisibleItem = savedInstanceState.getInt("firstVisibleItem");
-            visibleItemCount = savedInstanceState.getInt("visibleItemCount");
-            totalItemCount = savedInstanceState.getInt("totalItemCount");
-            loading = savedInstanceState.getBoolean("loading");
-        }
-    }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList("mMovieList", mMovieList);
-        outState.putInt("pageCount", pageCount);
-        outState.putInt("previousTotal", previousTotal);
-        outState.putInt("firstVisibleItem", firstVisibleItem);
-        outState.putInt("visibleItemCount", visibleItemCount);
-        outState.putInt("totalItemCount", totalItemCount);
-        outState.putBoolean("loading", loading);
-    }*/
+
+
 
     private void getMovieList(String url){
         JsonObjectRequest getListData = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>(){

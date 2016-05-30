@@ -60,7 +60,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.title.setText(movie.getTitle());
         Glide.with(mContext)
                 .load(movie.getPoster_path())
-                .centerCrop()
+                .fitCenter()
                 .into(holder.poster);
     }
 
