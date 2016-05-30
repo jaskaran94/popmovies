@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.www.popmovies.model.Movie;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     private ArrayList<Movie> mMovieList = new ArrayList<>();
-    private Activity mAct;
     private Context mContext;
 
     public MovieAdapter(ArrayList<Movie> mMovieList, Context context){
@@ -44,12 +44,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView poster;
-        //public TextView title;
+        public TextView title;
 
         public ViewHolder(View view){
             super(view);
             poster = (ImageView) view.findViewById(R.id.image_poster);
-            //title = (TextView) view.findViewById(R.id.movie_title);
+            title = (TextView) view.findViewById(R.id.movie_title);
         }
 
     }
@@ -57,9 +57,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Movie movie = mMovieList.get(position);
-        //holder.title.setText(movie.getTitle());
-        Picasso.with(mContext)
+        holder.title.setText(movie.getTitle());
+        Glide.with(mContext)
                 .load(movie.getPoster_path())
+                .centerCrop()
                 .into(holder.poster);
     }
 

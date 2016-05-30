@@ -47,6 +47,12 @@ public class MovieFragment extends Fragment {
     private int visibleThreshold = 4;
     private int pageCount = 1;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

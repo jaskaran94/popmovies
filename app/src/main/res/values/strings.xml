@@ -8,7 +8,7 @@
     <string name="sort">&amp;sort=popularity.dsc</string>
 
     <!-- Base url for poster paths-->
-    <string name="poster_path_url">http://image.tmdb.org/t/p/w342</string>
+    <string name="poster_path_url">http://image.tmdb.org/t/p/w185</string>
 
     <!-- Base url for backdrop paths-->
     <string name="bacdrop_path_url">http://image.tmdb.org/t/p/w500</string>
