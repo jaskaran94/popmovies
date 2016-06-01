@@ -1,6 +1,5 @@
 package com.example.www.popmovies;
 
-import android.app.DownloadManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -81,7 +80,7 @@ public class MovieFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.movieview);
 
         mRequestQueue = Volley.newRequestQueue(getActivity());
-        mAdapter = new MovieAdapter(mMovieList, getActivity());
+        mAdapter = new MovieAdapter(mMovieList, getActivity(), getActivity());
         mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
 
         url = getResources().getString(R.string.base_url) + getResources().getString(R.string.api_key) + getResources().getString(R.string.sort);
@@ -91,9 +90,6 @@ public class MovieFragment extends Fragment {
         return rootView;
 
     }
-
-
-
 
 
     private void getMovieList(String url){

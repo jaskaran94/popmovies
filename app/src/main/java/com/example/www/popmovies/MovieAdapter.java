@@ -2,7 +2,7 @@ package com.example.www.popmovies;
 
 import android.app.Activity;
 import android.content.Context;
-
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.www.popmovies.model.Movie;
 
-
 import java.util.ArrayList;
 
 /**
@@ -23,10 +22,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     private ArrayList<Movie> mMovieList = new ArrayList<>();
     private Context mContext;
+    private Activity mActivity;
+    private onAdapterItemSelectedListener mAdapterCallback;
 
-    public MovieAdapter(ArrayList<Movie> mMovieList, Context context){
+    public MovieAdapter(ArrayList<Movie> mMovieList, Context context, Activity activity){
         this.mMovieList = mMovieList;
         this.mContext = context;
+        this.mActivity = activity;
+        mAdapterCallback = (onAdapterItemSelectedListener) mActivity;
     }
 
 
@@ -41,6 +44,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return mMovieList.size();
     }
 
+    public interface onAdapterItemSelectedListener{
+        void onItemSelected(String id);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView poster;
@@ -50,18 +57,28 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             super(view);
             poster = (ImageView) view.findViewById(R.id.image_poster);
             title = (TextView) view.findViewById(R.id.movie_title);
+            Typeface roboto = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Medium.ttf");
+            title.setTypeface(roboto);
         }
 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Movie movie = mMovieList.get(position);
         holder.title.setText(movie.getTitle());
         Glide.with(mContext)
                 .load(movie.getPoster_path())
                 .fitCenter()
                 .into(holder.poster);
+        holder.poster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAdapterCallback != null){
+                    mAdapterCallback.onItemSelected(mMovieList.get(position).getTitle());
+                }
+            }
+        });
     }
 
 }

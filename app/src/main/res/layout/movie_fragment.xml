@@ -3,12 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/normalText">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/movieview"
+        android:padding="2dp"
         >
 
     </android.support.v7.widget.RecyclerView>
