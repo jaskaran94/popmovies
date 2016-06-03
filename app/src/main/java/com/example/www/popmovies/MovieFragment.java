@@ -1,12 +1,14 @@
 package com.example.www.popmovies;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,8 @@ import java.util.ArrayList;
 public class MovieFragment extends Fragment {
 
     final String LOG_TAG = MovieFragment.class.getSimpleName();
+
+    private Toolbar toolbar;
 
     private ArrayList<Movie> mMovieList = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -62,6 +66,7 @@ public class MovieFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState != null){
             mMovieList = savedInstanceState.getParcelableArrayList("mMovieList");
             pageCount = savedInstanceState.getInt("pageCount");
@@ -77,8 +82,12 @@ public class MovieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.movie_fragment, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.movieview);
+        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.normalText));
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.movieview);
         mRequestQueue = Volley.newRequestQueue(getActivity());
         mAdapter = new MovieAdapter(mMovieList, getActivity(), getActivity());
         mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
