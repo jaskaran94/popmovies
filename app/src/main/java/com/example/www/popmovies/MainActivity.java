@@ -1,9 +1,12 @@
 package com.example.www.popmovies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity{
+import com.example.www.popmovies.model.Movie;
+
+public class MainActivity extends AppCompatActivity implements MovieAdapter.onAdapterItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,5 +19,12 @@ public class MainActivity extends AppCompatActivity{
                     .commit();
         }
 
+    }
+
+    @Override
+    public void onItemSelected(Movie movie) {
+        Intent movieDetailActivity = new Intent(this, MovieDetailActivity.class)
+                .putExtra("movie", movie);
+        startActivity(movieDetailActivity);
     }
 }

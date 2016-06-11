@@ -2,7 +2,6 @@ package com.example.www.popmovies;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,12 +23,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private ArrayList<Movie> mMovieList = new ArrayList<>();
     private Context mContext;
     private Activity mActivity;
+    private onAdapterItemSelectedListener mAdapterCallback;
 
     public MovieAdapter(ArrayList<Movie> mMovieList, Context context, Activity activity){
         this.mMovieList = mMovieList;
         this.mContext = context;
         this.mActivity = activity;
-
+        mAdapterCallback = (onAdapterItemSelectedListener) mActivity;
     }
 
     @Override
@@ -43,6 +43,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return mMovieList.size();
     }
 
+    public interface onAdapterItemSelectedListener{
+        void onItemSelected(Movie movie);
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -71,9 +74,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Movie movie1 = mMovieList.get(position);
-                Intent detailActivity = new Intent(mContext, MovieDetailActivity.class)
+                /*Intent detailActivity = new Intent(mContext, MovieDetailActivity.class)
                         .putExtra("movie", movie1);
-                mContext.startActivity(detailActivity);
+                mContext.startActivity(detailActivity)*/
+                if (mAdapterCallback != null){
+                    mAdapterCallback.onItemSelected(movie1);
+                }
             }
         });
     }
