@@ -2,9 +2,8 @@ package com.example.www.popmovies;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.onAdapterItemSelectedListener{
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +16,5 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.onAd
                     .commit();
         }
 
-    }
-
-    @Override
-    public void onItemSelected(String id) {
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
     }
 }
