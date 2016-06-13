@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.www.popmovies.model.Movie;
+import com.example.www.popmovies.utils.TmdbUrls;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,7 +93,10 @@ public class MovieFragment extends Fragment {
         mAdapter = new MovieAdapter(mMovieList, getActivity(), getActivity());
         mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
 
-        url = getResources().getString(R.string.base_url) + getResources().getString(R.string.api_key) + getResources().getString(R.string.sort);
+        //url = getResources().getString(R.string.base_url) + getResources().getString(R.string.api_key) + getResources().getString(R.string.sort);
+        url = TmdbUrls.BASE_URL + TmdbUrls.API_KEY + TmdbUrls.SORT;
+
+        Log.d(LOG_TAG, url);
         getMovieList(url);
         setUpRecyclerView(mRecyclerView);
 
@@ -113,8 +117,8 @@ public class MovieFragment extends Fragment {
                                 mResultObject.getString("original_title"),
                                 mResultObject.getString("overview"),
                                 mResultObject.getString("release_date"),
-                                getResources().getString(R.string.poster_path_url) + mResultObject.getString("poster_path"),
-                                getResources().getString(R.string.bacdrop_path_url) + mResultObject.getString("backdrop_path"),
+                                TmdbUrls.POSTER_PATH_URL + mResultObject.getString("poster_path"),
+                                TmdbUrls.BACKDROP_PATH_URL + mResultObject.getString("backdrop_path"),
                                 mResultObject.getString("vote_average"));
                         mMovieList.add(movie);
                     }
@@ -155,7 +159,8 @@ public class MovieFragment extends Fragment {
                     }
                 }
                 if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)){
-                    String url = getResources().getString(R.string.base_url) + getResources().getString(R.string.api_key) + getResources().getString(R.string.sort) + "&page=" + pageCount;
+                    //String url = getResources().getString(R.string.base_url) + getResources().getString(R.string.api_key) + getResources().getString(R.string.sort) + "&page=" + pageCount;
+                    String url = TmdbUrls.BASE_URL + TmdbUrls.API_KEY + TmdbUrls.SORT + "&page=" + pageCount;
                     getMovieList(url);
                     loading = true;
                 }

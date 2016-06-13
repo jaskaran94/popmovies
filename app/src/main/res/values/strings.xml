@@ -1,18 +1,3 @@
 <resources>
     <string name="app_name">popmovies</string>
-
-    <!-- Base url for sorting according to popularity-->
-    <string name="base_url">https://api.themoviedb.org/3/discover/movie?</string>
-
-    <!-- Sort-->
-    <string name="sort">&amp;sort=popularity.dsc</string>
-
-    <!-- Base url for poster paths-->
-    <string name="poster_path_url">http://image.tmdb.org/t/p/w185</string>
-
-    <!-- Base url for backdrop paths-->
-    <string name="bacdrop_path_url">http://image.tmdb.org/t/p/w500</string>
-
-    <!-- API key-->
-    <string name="api_key">api_key=ae000fb8b40a5155607b3bbb935e250e</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.www.popmovies;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -24,9 +26,12 @@ import com.example.www.popmovies.model.Movie;
 public class MovieDetailFragment extends Fragment {
 
     Movie movie;
+    Activity mActivity;
+    TextView title;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.mActivity = getActivity();
     }
 
     @Nullable
@@ -37,15 +42,15 @@ public class MovieDetailFragment extends Fragment {
         final Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("details");
-
         Intent intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra("movie")) {
             movie = intent.getExtras().getParcelable("movie");
             displayInfo(rootView);
         }
+
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle(title.getText());
         return rootView;
     }
 
@@ -62,10 +67,13 @@ public class MovieDetailFragment extends Fragment {
                 .centerCrop()
                 .into(posterImage);
 
-        final TextView title = (TextView) v.findViewById(R.id.movie_title);
+        title = (TextView) v.findViewById(R.id.movie_title);
         title.setText(movie.getTitle());
 
         final TextView movieDesc = (TextView) v.findViewById(R.id.movie_desc);
         movieDesc.setText(movie.getOverview());
+        Typeface descFont = Typeface.createFromAsset(mActivity.getAssets(), "Roboto-Light.ttf");
+        movieDesc.setTypeface(descFont);
     }
+
 }
