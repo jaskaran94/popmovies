@@ -1,4 +1,4 @@
-package com.example.www.popmovies;
+package com.example.www.popmovies.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.www.popmovies.R;
 import com.example.www.popmovies.model.Movie;
 
 import java.util.ArrayList;

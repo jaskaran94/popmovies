@@ -28,10 +28,13 @@ public class MovieDetailFragment extends Fragment {
     Movie movie;
     Activity mActivity;
     TextView title;
+    //private ArrayList<Trailers> mTrailerList = new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mActivity = getActivity();
+
+
     }
 
     @Nullable
@@ -64,16 +67,50 @@ public class MovieDetailFragment extends Fragment {
         final ImageView posterImage = (ImageView) v.findViewById(R.id.image_poster);
         Glide.with(getActivity())
                 .load(movie.getPoster_path())
-                .centerCrop()
+                .fitCenter()
                 .into(posterImage);
 
         title = (TextView) v.findViewById(R.id.movie_title);
         title.setText(movie.getTitle());
+        Typeface titleFont = Typeface.createFromAsset(mActivity.getAssets(), "Roboto-Regular.ttf");
+        title.setTypeface(titleFont);
+
+        Typeface descFont = Typeface.createFromAsset(mActivity.getAssets(), "Roboto-Light.ttf");
+
+        final TextView tagLine = (TextView) v.findViewById(R.id.tag_line);
+        tagLine.setText("Its good to be bad");
+        tagLine.setTypeface(descFont);
+
+        final TextView releaseDate = (TextView) v.findViewById(R.id.release_date);
+        releaseDate.setText(movie.getRelease_date());
+        releaseDate.setTypeface(descFont);
+
+        final TextView voteAverage = (TextView) v.findViewById(R.id.vote_average);
+        voteAverage.setText(movie.getVote_average() + "/10");
+        voteAverage.setTypeface(descFont);
 
         final TextView movieDesc = (TextView) v.findViewById(R.id.movie_desc);
         movieDesc.setText(movie.getOverview());
-        Typeface descFont = Typeface.createFromAsset(mActivity.getAssets(), "Roboto-Light.ttf");
         movieDesc.setTypeface(descFont);
     }
+
+    /*private void parseVideos(String url){
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray mResultArray = response.getJSONArray("results");
+                    for (int i=0; i<mResultArray.length(); ++i){
+                        JSONObject mResultObject = mResultArray.getJSONObject(i);
+                        mResultObject.getString("id");
+                        mResultObject.getString("key");
+                        mResultObject.getString("name");
+                    }
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        })
+    }*/
 
 }

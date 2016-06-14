@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.www.popmovies.adapters.MovieAdapter;
 import com.example.www.popmovies.model.Movie;
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.onAdapterItemSelectedListener{
